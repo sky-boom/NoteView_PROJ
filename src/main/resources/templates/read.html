@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+	<head>
+		<meta charset="utf-8">
+
+		<title></title>
+		<link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/assets/css/read.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/assets/css/header.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/assets/font-awesome/css/font-awesome.css}" />
+		<link rel="stylesheet" th:href="@{/markdown/css/editormd.css}" />
+<!-- 		<link rel="stylesheet" type="text/css" href="strapdown/strapdown.css"/> -->
+		
+	</head>
+	<body>
+		<header class="gird-header">
+			<div class="header-logo"><a href="/index">NoteView</a></div>
+			<!-- 左侧 -->
+			<ul class="layui-nav layui-layout-left" lay-filter="">
+				<li class="layui-nav-item"><a href="/home">首页</a></li>
+				<li class="layui-nav-item layui-this"><a href="/myblog">我的博客</a>
+					<dl class="layui-nav-child">
+						<!-- 二级菜单 -->
+						<dd><a href="/dirview">目录视图</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">写文章</a>
+					<dl class="layui-nav-child">
+						<!-- 二级菜单 -->
+						<dd><a href="/markdown" target="_blank" >MarkDown</a></dd>
+					</dl>
+				</li>
+			</ul>
+			<!-- 右侧 -->
+			<ul class="right-nav layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+					<a href="javascript:;">
+						<img src="" class="layui-nav-img">
+						仁
+					</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">基本资料</a></dd>
+						<dd><a href="">安全设置</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item"><a href="">注销</a></li>
+			</ul>
+		</header>
+
+		<div class="doc-container" id="doc-container">
+			<div class="container-fixed">
+				<!-- 侧边栏 -->
+				<div class="col-side">
+					<div class="layui-card">
+						<div class="layui-card-header">提纲</div>
+						<div class="layui-card-body" id="content-toc">
+
+						</div>
+					</div>
+
+					<div class="layui-card">
+						<div class="layui-card-header">提纲</div>
+						<div class="layui-card-body" id="recently-art">
+
+						</div>
+					</div>
+				</div>
+
+				
+				<!-- 具体文章 -->
+				<div class="col-content mb20" >
+					<div class="inner">
+						<article class="article-list">
+							<input type="hidden" value="@Model.BlogTypeID" id="blogtypeid" />
+							<section class="article-item">
+								<aside class="title" style="line-height:2.5;">
+									<h2 th:text="${artInfo.getTitle()}">使用码云和VS托管本地代码</h2>
+									<p class="fc-grey fs-14">
+										<small>
+											作者：<a href="javascript:void(0)" target="_blank" class="fc-link" th:text="${artInfo.getAuthorName()}">燕十三</a>
+										</small>
+										<small class="ml10">围观群众：<i class="readcount" th:text="${artInfo.getHits()}">37</i></small>
+										<small class="ml10">更新于 <label th:text="${artInfo.getUpdateTime()}">2018-05-22:17:30:24</label> </small>
+									</p>
+								</aside>
+								<div class="time mt20" style="padding-bottom:0;">
+									<span class="day" th:text="${artInfo.getCr_day()}">22</span>
+									<span class="month fs-18" th:text="${artInfo.getCr_month()}">5<small class="fs-14">月</small></span>
+									<span class="year fs-18" th:text="${artInfo.getCr_year()}">2018</span>
+								</div>
+								<div class="content artiledetail">
+									<div id="text-content">
+										<textarea style="display:none;" id="text-content-md" th:text="${artInfo.getContent()}">
+
+										</textarea>
+									</div>
+
+									<div class="copyright mt20 mb20 content-foot">
+										<p class="f-toe fc-black">
+											非特殊说明，本文版权归 <span th:text="${artInfo.getAuthorName()}">仁</span> 所有，转载请注明出处.
+										</p>
+										<span class="f-toe">
+											本文标题：
+											<a href="javascript:void(0)" class="r-title" th:text="${artInfo.getTitle()}">使用码云和VS托管本地代码</a>
+										</span>
+										<span class="f-toe">
+											本文网址：
+											<a href="#">https://www.baidu.com</a>
+										</span>
+									</div>
+								</div>
+								<div class="viewer-operation">
+									<div class="like">
+										<i class="fa fa-thumbs-o-up"></i><span th:text="${artInfo.getLikes()}">200</span>
+									</div>
+									<div class="comment">
+										<i class="fa fa-commenting-o"></i>评论(<span th:text="${artInfo.getComments_num()}">20</span>)
+									</div>
+									<div class="star">
+										<i class="fa fa-star-o"></i>收藏
+									</div>
+								</div>
+
+								<fieldset class="layui-elem-field layui-field-title">
+									<legend>发表评论</legend>
+									<div class="layui-field-box">
+										<div class="leavemessage" style="text-align:initial">
+											<form class="layui-form blog-editor" action="">
+												<div class="layui-form-item layui-form-text">
+														<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+												</div>
+												<div class="layui-form-item">
+														<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+														<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</fieldset>
+								<ul class="blog-comment" id="blog-comment"></ul>
+							</section>
+						</article>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<footer class="grid-footer">
+			<div class="footer-fixed">
+				<div class="copyright">
+					<div class="info">
+						<div class="contact">
+							<a href="javascript:void(0)" class="github" target="_blank"><i class="fa fa-github"></i></a>
+							<a href="https://wpa.qq.com/msgrd?v=3&uin=930054439&site=qq&menu=yes" class="qq" target="_blank" title="930054439"><i
+								 class="fa fa-qq"></i></a>
+							<a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=gbiysbG0tbWyuMHw8K-i7uw" class="email" target="_blank"
+							 title="930054439@qq.com"><i class="fa fa-envelope"></i></a>
+							<a href="javascript:void(0)" class="weixin"><i class="fa fa-weixin"></i></a>
+						</div>
+						<p class="mt05">
+							Copyright &copy; 2021-2021 仁 All Rights Reserved V.1.0.0 蜀ICP备0000000号
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+
+		<!-- layui js -->
+		<script th:src="@{/layui/layui.js}"></script>
+		<!-- jquery -->
+		<script th:src="@{/assets/js/jquery-3.1.1.min.js}"></script>
+		<script th:src="@{/markdown/js/jquery-md5.js}"></script>
+		<!-- markdown -->
+		<script th:src="@{/markdown/lib/flowchart.min.js}"></script>
+		<script th:src="@{/markdown/lib/jquery.flowchart.min.js}"></script>
+		<script th:src="@{/markdown/lib/marked.min.js}"></script>
+		<script th:src="@{/markdown/lib/prettify.min.js}"></script>
+		<script th:src="@{/markdown/lib/underscore.min.js}"></script>
+		<script th:src="@{/markdown/lib/raphael.min.js}"></script>
+		<script th:src="@{/markdown/lib/sequence-diagram.min.js}"></script>
+		<script th:src="@{/markdown/js/editormd.js}"></script>
+		<!-- myblog -->
+		<script th:src="@{/assets/js/myblog.js}"></script>
+		<script th:src="@{/assets/js/read.js}"></script>
+	</body>
+</html>

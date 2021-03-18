@@ -1,0 +1,15 @@
+{
+	"cid": 1001,
+	"createTime": 1610535731,
+	"updateTime": 1610535791,
+	"authorId": 10,
+	"title": "MySQL从删库到跑路",
+	"tags": ["MySQL", "数据恢复"],
+	"brief": "1、开启bin-log打开mysql配置文件/etc/mysql/my.cnf（这个位置不是固定的，根据你安装的mysql目录去找）放开log_bin这一行log_bin=/var/log/mysql/mysql-bin.log随后重启mysql即执行/etc/init.d/mysqlrestart进入数据库，查看log_bin开启状态showvariableslike‘%log_bin%’;图片可以看到log_bin的值是ON就表示已经开启了log-bin再到/var/log/mysql/目录下查看，就已经多了两个log-bin日志文件mysql-bin.000001mysql-bin.index为什么是两个呢？",
+	"content": "1、开启bin-log打开mysql配置文件/etc/mysql/my.cnf（这个位置不是固定的，根据你安装的mysql目录去找）放开log_bin这一行log_bin=/var/log/mysql/mysql-bin.log随后重启mysql即执行/etc/init.d/mysqlrestart进入数据库，查看log_bin开启状态showvariableslike‘%log_bin%’;图片可以看到log_bin的值是ON就表示已经开启了log-bin再到/var/log/mysql/目录下查看，就已经多了两个log-bin日志文件mysql-bin.000001mysql-bin.index为什么是两个呢？我们打开mysql-bin.index文件后看到只有一行数据：/var/log/mysql/mysql-bin.000001什么意思呢？也即是mysql-bin.index这个文件最终指向了mysql-bin.000001文件。2、创建数据库表并插入数据DROPTABLEIFEXISTSxoxo;CREATETABLExoxo(stunamevarchar(10)DEFAULTNULL)ENGINE=InnoDBDEFAULTCHARSET=utf8;INSERTINTOxoxoVALUES(‘tom’);INSERTINTOxoxoVALUES(‘lilei’);INSERTINTOxoxoVALUES(‘jimGreen’);3、删库跑路droptablexoxo;如果此时没有对数据库做备份，且没有开启binlog，删完库基本就只能坐那哭了。不哭也行，那就是——撒丫子赶紧跑路~​撒丫子跑鸭4、恢复数据：先查看应该从哪里恢复。执行命令/usr/bin/mysqlbinlog–no-defaultsmysql-bin.000001|more我们可以看到每一次针对数据库的操作节点。如at833at934at961我们注意到在删除数据库表的下一个节点是961，那我们恢复数据时的终止节点也需要选这个恢复：/usr/bin/mysqlbinlog–no-defaultsmysql-bin.000001–stop-position=’961’|mysql-uroot-pfulianzhuren再进入数据库看看，数据全部都恢复啦。",
+	"type": 0,
+	"published": true,
+	"commentsNum": 3,
+	"hits": 900,
+	"likes": 123
+}

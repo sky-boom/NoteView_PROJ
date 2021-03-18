@@ -1,0 +1,176 @@
+
+/* 页面总内容(框架),除去页脚 */
+.doc-container{position:relative;padding-top:90px;-webkit-transition:all .2s;transition:all .2s;min-height:100vh}
+/* 页面总内容(边距),除去页头和页脚 */
+.container-fixed,.footer-fixed,.header-fixed{width:1280px;margin-left:auto;margin-right:auto;position:relative}
+.col-side{width: 200px;}
+.test{height: 100px; background-color: #000000;}
+.col-side{float: left; background-color: #fff;}
+.col-content{float: right; background-color: #fff;}
+.col-content{width:calc(100% - 230px)}
+
+/*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓侧边栏↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
+.col-side .goto{ display: block; border-radius: 30px; background-color: #009688; height: 40px; width: 150px; text-align: center; line-height: 40px; color: #f7f7f7; margin: 20px auto;}
+.side-list{ padding-bottom: 200px; }
+.selected *{ color: #009688 !important;}
+.side-list ul li{padding: 5px 20px; cursor: pointer;}
+.side-list .icon{ font-size: 18px; color: #616161; margin-right: 20px; display: inline-block; width: 18px;}
+.side-list .desc{ display: inline-block; border-bottom: 1px solid #e5e5e5; height: 30px; width: 100px; font-weight: 600; color: #282828; }
+/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑End of 侧边栏↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
+
+/*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓文章列表↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
+.col-content .top-tab{ padding: 10px; }
+.if-form>div{ display: inline-block; }
+.if-form .if-Date{ width: 190px; cursor: pointer;}
+.if-form .selectmanu{ width: 100px; }
+.if-form .if-search{ width: 200px; }
+/* 一块文章 */
+.content-list{ padding: 0 38px; padding-bottom: 15px;}
+.cont-title{ padding: 16px 0; color: #222222; font-size: 17px;}
+.bottom-mess{ padding: 16px 0; color: #6b6b6b; }
+.bottom-mess i{margin-right: 7px;}
+.bottom-mess span:not(:first-child){ margin-right: 20px; }
+.bottom-util {float:right;}
+.bottom-util a{margin-left: 20px;}
+.bottom-util .item:hover{  }
+.border{ margin: 0px 9px; }
+.content-card{ display: inline-block; border-bottom: 1px solid #e5e5e5; width: 100%; margin: 5px 0;}
+/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑End of 文章列表↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
+
+
+/*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓具体文章内容↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
+.f-oh{
+    overflow: hidden;
+    zoom: 1;
+    clear: both;
+}
+.f-oh a{
+    margin-right: 30px;
+    color: #565755;
+}
+.f-oh a:hover{
+    text-decoration:underline;
+    color:#6bc30d;
+}
+.fs-12{
+    font-size:12px;
+}
+.fs-14{
+    font-size:14px;
+}
+.fs-16,h6{
+    font-size:16px;
+}
+.fs-18{
+    font-size:18px;
+}
+.fs-24{
+    font-size:24px;
+}
+.fs-32{
+    font-size:32px;
+}
+.f-fr{
+    float:right;
+}
+.fc-blue{
+    color: #2ea7e0;
+}
+.fc-black{
+    color:#383937
+}
+.fc-grey{
+    color:#787977;
+}
+.fc-red{
+    color:#ff4351;
+}
+.f-fwb{
+    font-weight:bold;
+}
+.f-fwn{
+    font-weight:normal;
+}
+.f-fl{
+    float:left;
+}
+.f-vam{
+    vertical-align:middle;
+}
+/*.f-ff-icon{
+    font-family:"FontAwesome";
+    font-style:normal;
+    text-rendering:auto;
+}*/
+.f-fr{
+    float:right;
+}
+.mt05{
+    margin-top:5px;
+}
+.mt10{
+    margin-top:10px;
+}
+.mt20{
+    margin-top:20px;
+}
+.ml05{
+    margin-left:5px;
+}
+.ml10{
+    margin-left:10px;
+}
+.ml20{
+    margin-left:20px;
+}
+.mr05{
+    margin-right:5px;
+}
+.f-noneselect{
+    -webkit-user-select: none;
+    user-select: none;
+}
+.fc-link{
+    color: #3e8bc7 !important;
+}
+
+.f-cb,.f-cb:after{
+    display: block;
+    content: " ";
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+.article-list{position:relative}
+.bloglist .article-item{overflow:hidden;}
+.article-item{padding:20px 30px 25px 30px;position:relative;/*overflow:hidden;*/margin-top:20px;background-color:#fff}
+.article-item .fc-flag{position:absolute;height:20px;line-height:20px;text-align:center;width:74px;background-color:#ff5722;color:#fff;transform:rotate(-45deg);left:-18px;top:9px}
+.article-item .title{line-height:30px;padding:5px 130px 5px 0;border-bottom:1px solid #e8e9e7;font-size:18px;font-weight:400}
+.article-item .title span{font-size:16px;font-weight:400;display:inline-block;vertical-align:bottom}
+.article-item .title a{color:#212220}
+.article-item .time{font-family:SourceCodeProRegular,Menlo,Monaco,Consolas,"Courier New",monospace,'Helvetica Neue',Arial,sans-serif;position:absolute;right:10px;top:10px;background-color:#fff;padding:0 20px 5px 20px;line-height:32px}
+.article-item .time .day{display:block;text-align:center;font-weight:700;font-size:40px;color:#6bc30d;position:relative;top:2px}
+.article-item .time .month,.article-item .time .year{color:#989997}
+.article-item .content{margin:20px 0 0 0;line-height:28px;position:relative;/*overflow:hidden;*/min-height:200px}
+.article-item .artiledetail img:hover{box-shadow: 0 0 5px #333;}
+.article-item .content a{color:#3e8bc7;margin:0 2px}
+.article-item .content .cover{display:block;width:300px;height:180px;border:1px solid #e8e9e7;overflow:hidden;float:left;margin-right:20px}
+.article-item .content .cover img{display:block;width:100%!important;height:100%!important}
+.article-item .read-more{height:40px;line-height:40px;position:relative}
+.article-item .read-more:before{content:" ";display:inline-block;height:1px;top:20px;left:100px;right:0;position:absolute;background-color:#d0d0d0}
+.article-item .footer{color:#787977}
+.article-item .footer a{display:inline-block;vertical-align:middle;font-style:normal}
+.article-item .footer i{display:inline-block;vertical-align:middle;font-style:normal}
+.article-item .footer .tags-icon:before{content:"\f02c"}
+.article-item .footer .tags .tag{display:inline-block;font-size:12px;padding:2px 5px;background-color:#f1f2f0;color:#787977;margin:2px;text-decoration:none;-webkit-transition:all .2s;transition:all .2s}
+.article-item .footer .readicon{margin-right:3px;font-size:16px}
+.article-item .footer .readicon:before{content:"\f06e"}
+.article-item .footer .commenticon:before{content:"\f086"}
+.article-item .footer .num{font-family:SourceCodeProRegular,Menlo,Monaco,Consolas,"Courier New",monospace,'Helvetica Neue',Arial,sans-serif;display:inline-block;vertical-align:middle;font-style:normal}
+.article-item .content a:hover,.article-item .footer a:hover,.article-item .title a:hover,.article-item a:hover{color:#6bc30d;text-decoration:underline}
+.article-item .footer .tags .tag:hover{color:#fff;background:#6bc30d}
+.content-foot { background-color: #f8f8f8; }
+
+/* 调整markdown */
+#text-content {padding: 0;}
+/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑End of 具体文章内容↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/

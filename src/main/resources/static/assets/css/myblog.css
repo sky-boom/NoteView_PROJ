@@ -1,0 +1,87 @@
+/*
+ *
+ *******************************************************************
+ *		myblog.html (L我的博客.html)
+ *******************************************************************
+ *
+ *
+ */
+/* 页面总内容(框架),除去页脚 */
+.doc-container{position:relative;padding-top:90px;-webkit-transition:all .2s;transition:all .2s;min-height:100vh}
+/* 页面总内容(边距),除去页头和页脚 */
+.container-fixed,.footer-fixed,.header-fixed{width:1280px;margin-left:auto;margin-right:auto;position:relative}
+/*.container-fixed{ width: 84%; }*/
+.col-side{width: 200px;float: left; background-color: #fff;}
+.test{height: 100px; background-color: #000000;}
+.col-content{float: right; background-color: #fff;}
+.col-content{width:calc(100% - 230px)}
+
+/*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓侧边栏↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
+.col-side .goto{ display: block; border-radius: 30px; background-color: #009688; height: 40px; width: 150px; text-align: center; line-height: 40px; color: #f7f7f7; margin: 20px auto;}
+.col-side .goto2{ display: block; text-align: center;background-color: #ffffff; border: 1px solid #009688; transition: all 0.5s; color: #009688;}
+.col-side .goto2 span{position: relative; display: inline-block; transition: 0.5s;}
+.col-side .goto2 span:after { content: '»'; position: relative; opacity: 0; top: 0; right: -10px; transition: 0.5s;}
+.col-side .goto2:hover span:after{ opacity: 1; right: 0; }
+.col-side .side-list{ padding-bottom: 200px; }
+.col-side .selected i, .col-side .selected span{ color: #009688;}
+.side-list ul li{padding: 5px 20px; cursor: pointer;}
+.side-list .icon{ font-size: 18px; color: #616161; margin-right: 20px; display: inline-block; width: 18px;}
+.side-list .desc{ display: inline-block; border-bottom: 1px solid #e5e5e5; height: 30px; width: 100px; font-weight: 600; color: #282828; }
+/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑End of 侧边栏↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
+
+/*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓文章列表↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
+/* 条件筛选 */
+.col-content .top-tab{ padding: 10px; }
+.col-content .list{ margin-bottom: 20px; }
+.if-form>div{ display: inline-block; }
+.if-form .if-Date{ width: 190px; cursor: pointer;}
+.if-form .selectmanu{ width: 100px; }
+.if-form .if-search{ width: 200px; }
+.if-form #dir-info input{ cursor: pointer; }
+/* .content-file{ float: right; width: 750px; } */
+.dir-select{ margin: 0 10px; }
+/* 一块文章 */
+.content-list{ padding: 0 38px; padding-bottom: 15px; min-height: 600px; padding-bottom: 84px; position: relative;}
+.content-file .menu-sm { display: none; position: absolute; line-height: 36px;padding: 5px 0;box-shadow: 0 2px 4px rgba(0, 0, 0, .12);border: 1px solid #d2d2d2;background-color: #fff;z-index: 100;border-radius: 2px;white-space: nowrap;}
+.content-file .menu-sm a{margin: 0 !important; display: block; padding: 0 10px;}
+.content-file .menu-sm a:hover {background-color: #f2f2f2;color: #000;}
+
+.content-file .cont-title{ padding: 14px 0; color: #222222; font-size: 17px;}
+.content-file .bottom-mess{ padding: 14px 0; color: #6b6b6b; }
+.content-file .bottom-mess i{margin-right: 7px;}
+.content-file .bottom-mess span:not(:first-child){ margin-right: 20px; }
+.content-file .bottom-util {float:right;}
+.content-file .bottom-util a{margin-left: 20px;}
+.content-file .bottom-util div{ margin-left: 20px; display: inline-block; cursor: pointer; }
+.content-file .bottom-util div:hover{ color: #8e8e8e; }
+.border{ margin: 0px 9px; }
+
+.content-card{ display: inline-block; border-bottom: 1px solid #e5e5e5; width: 100%; margin: 5px 0;}
+/* 目录 */
+/* .content-dir{ width: 200px; height: 200px; float: left; background-color: #b4b4b4;} */
+/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑End of 文章列表↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
+
+/*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓分页↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
+ul.pagination {display: inline-block;padding: 0;margin: 20px 0; position: absolute; bottom: 0px;}
+ul.pagination li {display: inline;}
+ul.pagination li a {color: black;float: left;padding: 8px 16px;text-decoration: none;border-radius: 5px;transition: background-color .3s; cursor: pointer;}
+ul.pagination li a.active {background-color: #009688;color: white;border-radius: 5px;}
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑End of 分页↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
+
+/*dir选择目录*/
+#dirframe *{text-align: left;}
+#dirframe .layui-card-header{ font-weight: 600; }
+#getDir {width: 200px; cursor: pointer;}
+#dir-system{ color: #515151; font-size: 14px;min-height: 230px; max-height: 230px; overflow:auto; border: 1px solid #f0f0f0; width: 250px}
+#dir-system li{ text-overflow:ellipsis; overflow: hidden; white-space:nowrap; }
+#dir-system li a{ cursor: pointer; display: block; }
+#dir-system i{ padding-right: 4px; }
+#dir-system .level-1{ margin-left: 10px; }
+#dir-system .level-2{ margin-left: 20px; }
+#dir-system .level-3{ margin-left: 20px; }
+#dir-system .level-4{ margin-left: 20px; }
+#dir-system li>a>i{ color: #FFB800; }
+.dir-fold{ background-position:5px -16px;}
+#dir-system .selected, #dir-system .selected>a>i, #dir-system .selected>a{ color: #009688; }

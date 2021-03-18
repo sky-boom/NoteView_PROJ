@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//MyBatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置映射
+    namespace : 命名空间(通俗说法: 给当前映射文件的唯一标识:起一个唯一的名字)
+    绑定一个对应的DAO接口
+ -->
+<mapper namespace="com.wzr.dao.UserMapper">
+
+    <select id="queryByName" parameterType="String" resultType="User_auth">
+        SELECT * FROM noteview.user_auth
+        WHERE account = #{account};
+    </select>
+
+    <select id="queryIdByName" parameterType="String" resultType="Integer">
+        SELECT `user_id` FROM noteview.user_auth
+        WHERE `account` = #{account};
+    </select>
+
+</mapper>

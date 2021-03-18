@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//MyBatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置映射
+    namespace : 命名空间(通俗说法: 给当前映射文件的唯一标识:起一个唯一的名字)
+    绑定一个对应的DAO接口
+ -->
+<mapper namespace="com.wzr.dao.DirectoryMapper">
+
+    <select id="getAllDirTreeRecord" parameterType="int" resultType="Dir_tree">
+        SELECT * FROM `noteview`.`dir_tree`
+        WHERE `dir_id` IN (SELECT `dir_id` FROM `dir_item`
+                            WHERE `user_id` = #{user_id});
+    </select>
+
+    <select id="getAllDirItemNodeRecord" parameterType="int" resultType="DirectoryTreeNode">
+        SELECT `dir_id`, `dir_name`, `parent_dir_id` FROM `noteview`.`dir_item`
+        WHERE `user_id` = #{user_id};
+    </select>
+
+    <select id="getAllFatherDirTree" parameterType="int" resultType="Dir_tree">
+        SELECT * FROM `noteview`.`dir_tree`
+        WHERE `dir_id` = #{dir_id} AND `level` != 0;
+    </select>
+
+    <select id="getAllChildDirTree" parameterType="int" resultType="Dir_tree">
+        SELECT * FROM `noteview`.`dir_tree`
+        WHERE `ancestor_id` = #{dir_id} AND `level` != 0;
+    </select>
+
+    <select id="getAllChildDirId" resultType="Integer">
+        SELECT `dir_id` FROM `noteview`.`dir_tree`
+        WHERE `ancestor_id` = #{dir_id};
+    </select>
+
+    <insert id="insertOneDir" parameterType="Dir_item" useGeneratedKeys="true" keyProperty="dir_id" >
+        INSERT INTO `noteview`.`dir_item`
+        VALUES (#{dir_id}, #{dir_name}, #{parent_dir_id}, #{user_id});
+    </insert>
+
+    <insert id="insertOneRelation" parameterType="Dir_tree">
+        INSERT INTO `noteview`.`dir_tree`
+        VALUES (#{id}, #{ancestor_id}, #{level}, #{dir_id});
+    </insert>
+
+    <select id="deleteDirById" parameterType="int">
+        -- 根据dir_tree把doc设置为-1
+        UPDATE `noteview`.`article`
+        SET `dir_id` = -1
+        WHERE `dir_id` IN (SELECT `dir_id` FROM `dir_tree`
+                                  WHERE `ancestor_id` = #{dir_id});
+        -- 根据dir_tree删除dir_item
+        DELETE FROM `noteview`.`dir_item`
+        WHERE `dir_id` IN (SELECT `dir_id` FROM `dir_tree`
+                           WHERE `ancestor_id` = #{dir_id});
+        -- 再删除dir_tree
+        DELETE FROM `noteview`.`dir_tree`
+        WHERE `ancestor_id` = #{dir_id} OR `dir_id` = #{dir_id};
+    </select>
+
+    <delete id="deleteParentDependence" parameterType="int">
+        DELETE FROM `noteview`.`dir_tree`
+        <!-- 删除[还留有断开结点父联系]的记录 -->
+        WHERE `ancestor_id` IN      
+            <foreach item="f" collection="fatherRel" open="(" separator="," close=")">
+                #{f}
+            </foreach>
+        <!-- 指定要删除(父联系)的目标是子目录(包括curr) -->
+        AND `dir_id` IN
+            <foreach item="c" collection="childDir" open="(" separator="," close=")">
+                #{c}
+            </foreach>
+    </delete>
+
+    <update id="updateDirName">
+        UPDATE `noteview`.`dir_item`
+        SET `dir_name` = #{name}
+        WHERE `dir_id` = #{dir_id};
+    </update>
+
+    <select id="queryDocByDirId" parameterType="int" resultType="doc">
+        SELECT `art_id`, `title`, `update_time`, `dir_id` FROM `noteview`.`article`
+        WHERE `dir_id` = #{dir_id};
+    </select>
+
+    <select id="queryAllDocByUserId" parameterType="int" resultType="Doc">
+        SELECT `art_id`, `title`, `update_time`, `dir_id` FROM `noteview`.`article`
+        ORDER BY `update_time` DESC;
+    </select>
+
+    <update id="updateDirItemParentId">
+        UPDATE `noteview`.`dir_item`
+        SET `parent_dir_id` = #{new_parent_id}
+        WHERE `dir_id` = #{dir_id};
+    </update>
+
+    <update id="updateArtDirId">
+        UPDATE `noteview`.`article`
+        SET `dir_id` = #{dir_id}
+        WHERE `art_id` = #{art_id};
+    </update>
+
+    <update id="hideDocById">
+        UPDATE `noteview`.`article`
+        SET `dir_id` = -1
+        WHERE `art_id` = #{art_id};
+    </update>
+
+</mapper>

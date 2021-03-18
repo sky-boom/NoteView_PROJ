@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//MyBatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置映射
+    namespace : 命名空间(通俗说法: 给当前映射文件的唯一标识:起一个唯一的名字)
+    绑定一个对应的DAO接口
+ -->
+<mapper namespace="com.wzr.dao.ContentMapper">
+
+    <insert id="publishArticle" parameterType="Article" useGeneratedKeys="true" keyProperty="art_id" >
+        INSERT INTO `noteview`.`article` VALUES
+        (#{art_id}, #{create_time}, #{update_time}, #{user_id}, #{title}, #{tags}, #{content}, #{type}, #{published}, #{comments_num}, #{hits}, #{likes}, #{dir_id});
+    </insert>
+
+    <update id="updateArticle" parameterType="Article" >
+        UPDATE `noteview`.`article`
+        <trim prefix="set" suffixOverrides=",">
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="tags != null">
+                tags = #{tags},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+        </trim>
+        WHERE art_id = #{art_id} AND user_id = #{user_id};
+    </update>
+
+    <!-- 用来记录分页查询时的所有数据量，避免出现分页查询时需要查询两次 -->
+    <resultMap id="count" type="java.lang.Integer" >
+        <result column="total"/>
+    </resultMap>
+    <resultMap id="article" type="article">
+        <id column="art_id" property="art_id" />
+        <result column="create_time" property="create_time" />
+        <result column="update_time" property="update_time" />
+        <result column="user_id" property="user_id" />
+        <result column="title" property="title" />
+        <result column="tags" property="tags" />
+        <result column="content" property="content" />
+        <result column="type" property="type" />
+        <result column="published" property="published" />
+        <result column="comments_num" property="comments_num" />
+        <result column="hits" property="hits" />
+        <result column="likes" property="likes" />
+    </resultMap>
+    <select id="getArtList" parameterType="int" resultMap="article, count">
+        SELECT SQL_CALC_FOUND_ROWS * FROM `noteview`.`article`
+        WHERE `user_id` = #{user_id}
+        <if test="keyword != ''">
+            AND `title` like CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="dir_id != 0">
+            AND `dir_id` = #{dir_id}
+        </if>
+        ORDER BY `update_time` DESC
+        <if test="page != 0">
+            limit #{start},#{page}
+        </if>;
+        SELECT FOUND_ROWS() AS total;
+    </select>
+
+    <select id="queryArtById" parameterType="int" resultType="Article">
+        SELECT * FROM `noteview`.`article`
+        WHERE `user_id` = #{user_id} AND `art_id` = #{art_id};
+    </select>
+
+    <delete id="deleteArtById">
+        DELETE FROM `noteview`.`article`
+        WHERE `art_id` = #{art_id} AND `user_id` = #{user_id};
+    </delete>
+
+</mapper>

@@ -1,0 +1,54 @@
+body{ top: 0; right: 0; bottom: 0; left: 0; position: fixed;}
+/**********头部*********/
+header{width:100%;min-height:50px;position:fixed;background-color:#2F4056;z-index:1000;top:0;left:0;border-bottom:1px solid #e8e9e7;font-size:14px}
+/* 暴力改layui源代码 */
+.layui-nav, .layui-nav a{ height: 48px; line-height: 48px;}
+header .prev{ height: 48px; position: fixed; left: 5; /* background-color: #0000C0; */ line-height: 50px; padding-left: 30px;}
+header .prev a{ display: inline-block; }
+header .prev span{ color: #ececec;}
+header .middle{position: fixed; width: 400px; height: 34px; margin: 8px; margin-left: 100px; font-size: 20px;}
+header .title-input{ height: 34px; width: 400px; padding-left: 20px; border-radius: 25px; border: none;}
+header .right{ margin: 6px 0; position: fixed; right: 0; margin-right: 200px;}
+/**********编辑器*********/ 
+
+#layout{ margin-top: 50px; }
+/* 取消编辑器低下的margin */
+#test-editormd{ margin-bottom: 0; }
+/* 调整编辑器高度 */
+.editormd{ position: fixed; bottom: 24px; }
+
+/**********底部*********/
+footer{ height: 24px; width: 100%; background-color: #2F4056; position: fixed; bottom: 0;z-index: 100; color: #f3f3f3;}
+footer div{ display: inline-block; }
+footer span:nth-child(2n - 1){ margin-left: 20px; }
+.bottom-left{ float: left; }
+.bottom-right{ float: right; margin-right: 100px; }
+
+/**********发布表单*********/
+#publishframe #curtain{ width: 100%; height: 100%; position:absolute; top:0; z-index:1002; background-color: rgba(123, 123, 123, 0.4); }
+#publishframe #content{ width: 500px; height: 360px; position: absolute; top: 50%; left: 50%; z-index: 1003; margin-top: -250px; margin-left: -200px;
+    background-color: #fff; border: 1px solid #8d8d8d
+}
+#publishframe *{ text-align: left;  }
+#publishframe .layui-card-header{ font-weight: 600; }
+#publishframe .layui-form-label{ color: #363636; text-align: right; width: 90px; }
+#publishframe .tags{ width: 100px; margin-left: 20px; }
+#publishframe #show_tags{ margin-left: 110px; margin-bottom: 20px; }
+#publishframe #show_tags div{ border: 1px solid #525252; display: inline-block; height: 20px; line-height: 20px; border-radius: 25px; padding: 0 5px; color: gray;}
+#publishframe #show_tags a{ cursor: pointer; color: gray;}
+
+/*dir选择目录*/
+#dirframe *{text-align: left;}
+#dirframe .layui-card-header{ font-weight: 600; }
+#getDir {width: 200px; cursor: pointer;}
+#dir-system{ color: #515151; font-size: 14px;min-height: 230px; max-height: 230px; overflow:auto; border: 1px solid #f0f0f0; width: 250px}
+#dir-system li{ text-overflow:ellipsis; overflow: hidden; white-space:nowrap; }
+#dir-system li a{ cursor: pointer; display: block; }
+#dir-system i{ padding-right: 4px; }
+#dir-system .level-1{ margin-left: 10px; }
+#dir-system .level-2{ margin-left: 20px; }
+#dir-system .level-3{ margin-left: 20px; }
+#dir-system .level-4{ margin-left: 20px; }
+#dir-system li>a>i{ color: #FFB800; }
+.dir-fold{ background-position:5px -16px;}
+#dir-system .selected, #dir-system .selected>a>i, #dir-system .selected>a{ color: #009688; }

@@ -1,0 +1,157 @@
+/*
+ *
+ *******************************************************************
+ *		头部header导航栏，底部footer，以及自定义全局样式
+ *******************************************************************
+ *
+ *
+ */
+.f-oh{
+    overflow: hidden;
+    zoom: 1;
+    clear: both;
+}
+.f-oh a{
+    margin-right: 30px;
+    color: #565755;
+}
+.f-oh a:hover{
+    text-decoration:underline;
+    color:#6bc30d;
+}
+.fs-12{
+    font-size:12px;
+}
+.fs-14{
+    font-size:14px;
+}
+.fs-16,h6{
+    font-size:16px;
+}
+.fs-18{
+    font-size:18px;
+}
+.fs-24{
+    font-size:24px;
+}
+.fs-32{
+    font-size:32px;
+}
+.f-fr{
+    float:right;
+}
+.fc-blue{
+    color: #2ea7e0;
+}
+.fc-black{
+    color:#383937
+}
+.fc-grey{
+    color:#787977;
+}
+.fc-red{
+    color:#ff4351;
+}
+.f-fwb{
+    font-weight:bold;
+}
+.f-fwn{
+    font-weight:normal;
+}
+.f-fl{
+    float:left;
+}
+.f-vam{
+    vertical-align:middle;
+}
+/*.f-ff-icon{
+    font-family:"FontAwesome";
+    font-style:normal;
+    text-rendering:auto;
+}*/
+.f-fr{
+    float:right;
+}
+.mt05{
+    margin-top:5px;
+}
+.mt10{
+    margin-top:10px;
+}
+.mt20{
+    margin-top:20px;
+}
+.mt25{
+    margin-top:25px;
+}
+.mt30{
+    margin-top:30px;
+}
+.ml05{
+    margin-left:5px;
+}
+.ml10{
+    margin-left:10px;
+}
+.ml20{
+    margin-left:20px;
+}
+.mr05{
+    margin-right:5px;
+}
+.mb15{
+	margin-bottom: 15px;
+}
+.mb20{
+	margin-bottom: 20px;
+}
+.f-noneselect{
+    -webkit-user-select: none;
+    user-select: none;
+}
+.fc-link{
+    color: #3e8bc7 !important;
+}
+
+.f-cb,.f-cb:after{
+    display: block;
+    content: " ";
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+
+body{background: url(../imgs/bg.jpg) no-repeat; background-attachment: fixed;}
+
+header .layui-nav{ background-color: rgba(255,255,255,1); }
+/* header .layui-nav{ background-color: #8b8b8b; } */
+header .layui-nav-item a{ color: #000000 !important; }
+/* 暴力改源代码  */
+.layui-nav-more{content:'';width:0;height:0;border-style:solid dashed dashed;border-color:transparent transparent #000000;overflow:hidden;cursor:pointer;transition:all .2s;-webkit-transition:all .2s;position:absolute;top:50%;right:3px;margin-top:-4px;border-width:6px;border-top-color:rgb(0 0 0 / 70%) !important;/*关键*/}.layui-nav .layui-nav-mored,.layui-nav-itemed>a .layui-nav-more{margin-top:-9px;border-style:dashed dashed solid;border-color:transparent transparent rgb(0 0 0 / 70%) !important;/*关键*/}
+
+.gird-header{width:100%;min-height:60px;position:fixed;background-color:rgba(255,255,255,1);z-index:1000;top:0;left:0;border-bottom:1px solid #e8e9e7;font-size:14px}
+.header-inner{margin-left:10px;margin-right:10px;position:relative}
+.header-logo{font-family:BarbaraHand;font-size:20px;color:#444647;text-align:center;position:absolute;left:20; line-height: 55px; margin-left: 50px;}
+.nav{display:block;position:absolute;right:15%}
+.nav li{display:block;float:left;margin:10px 5px;position:relative}
+.nav li:before{width:0;height:2px;position:absolute;bottom:-11px;left:50%;background-color:#6bc30d;content:"";transition:all .6s;z-index:-1}
+.nav li a{display:block;line-height:32px;padding:4px 28px;color:#212220;font-weight:400;font-size:15px;text-shadow:0 1px 0 rgba(255,255,255,.2);-webkit-transition:all .2s;transition:all .2s}
+.nav .current:before{width:100%;left:0}
+.nav .current a{color:#6bc30d}
+
+/* 页脚 */
+.grid-footer{background-color:#212220;color:#919290;font-size:14px;padding:20px 0 0 0;position:relative;zoom:1;clear:both;line-height:20px;margin-top:40px;overflow:hidden}
+.copyright{padding:10px 0 10px 0}
+.copyright .info{position:relative;text-align:center}
+.copyright p{color:#565755;font-size:13px;}
+.copyright span{color:#565755;font-size:13px;}
+.copyright .contact a{display:inline-block;width:30px;height:30px;background-color:rgba(255,255,255,.2);text-align:center;line-height:30px;text-shadow:1px 1px 1px rgba(0,0,0,.5);font-size:14px;margin-left:15px;margin-right:0;border-radius:100%;text-decoration:none;color:rgba(255,255,255,.5);-webkit-transition:all .3s;transition:all .3s}
+.copyright .contact a:hover{color:#fff}
+.copyright .contact .github:hover{background-color:#b952c5}
+.copyright .contact .qq:hover{background-color:#d25744}
+.copyright .contact .email:hover{background-color:#668f20}
+.copyright .contact .weixin:hover{background-color:#06a2c9;}
+
+/* markdown相关 */
+/* #test-editormd ul, #test-editormd li {list-style: inside;}
+.linenums li{list-style: none;} */

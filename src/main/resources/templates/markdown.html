@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="utf-8"/>
+    <title>Tex 科学公式语言 (TeX/LaTeX) - Editor.md examples</title>
+    <link rel="stylesheet" th:href="@{/markdown/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/markdown/css/editormd.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/markdown.css}"/>
+
+</head>
+<body>
+<header class="gird-header">
+    <div class="prev">
+        <a href="/myblog">
+            <span class="layui-icon layui-icon-prev"></span>
+            <span>返回</span>
+        </a>
+    </div>
+
+<!--    <div class="middle">-->
+<!--        <input type="text" name="title" placeholder="请输入标题" autocomplete="off" class="title-input">-->
+<!--    </div>-->
+
+    <div class="right">
+        <button type="button" class="layui-btn layui-btn-primary layui-btn-radius">保存草稿</button>
+        <button type="button" class="layui-btn layui-btn-radius" id="publish">发布博客</button>
+    </div>
+
+    <ul class="right-nav layui-nav layui-layout-right layui-bg-cyan">
+        <li class="layui-nav-item">
+            <a href="#">
+                <img src="" class="layui-nav-img">
+                仁
+            </a>
+            <dl class="layui-nav-child">
+                <dd><a href="">基本资料</a></dd>
+                <dd><a href="">安全设置</a></dd>
+            </dl>
+        </li>
+    </ul>
+</header>
+<div id="publishframe">
+    <!-- 幕布 -->
+    <div id="curtain" hidden></div>
+    <!-- 内容 -->
+    <div id="content" hidden>
+        <div class="layui-card">
+            <div class="layui-card-header">发布文章</div>
+            <div class="layui-card-body">
+                <form class="layui-form" action="" lay-filter="*" id="pform">
+                    <input type="hidden" name="isEdit" th:value="${isEdit}">
+                    <input type="hidden" name="art_id" th:value="${art_id}">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input" th:value="${artInfo?.getTitle()}">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章类型</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="type" value="0" title="原创" checked="">
+                            <input type="radio" name="type" value="1" title="转载">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章标签</label>
+                        <div class="layui-input-inline tags">
+                            <input type="text" name="search_tags" lay-verify="title" autocomplete="off" placeholder="搜索标签" class="layui-input">
+                        </div>
+                        <a class="layui-btn" id="add_tags">添加</a>
+                        <span id="add_tip"></span>
+                    </div>
+                    <div id="show_tags">
+<!--                        <div>-->
+<!--                            <input type="hidden" name="tags" value="mysql">-->
+<!--                            <span>mysql</span>-->
+<!--                            <a>×</a>-->
+<!--                        </div>-->
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">存放目录</label>
+                        <div id="dir_info" class="layui-input-block">
+                            <input id="getDir" type="text" name="dir_name" lay-verify="title" autocomplete="off" placeholder="点击选择" class="layui-input" readonly>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn layui-btn-normal" id="concel">取消</button>
+                            <button type="submit" class="layui-btn" lay-submit="">立即提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="layout">
+    <div id="test-editormd">
+        <textarea id="test-editormd-markdown-doc" name="test-editormd-markdown-doc" style="display:none;" th:text="${artInfo?.getContent()}"></textarea>
+<!--        <textarea id="test-editormd-html-code" name="test-editormd-html-code" style="display:none;"></textarea>-->
+    </div>
+</div>
+<footer>
+    <div class="bottom-left">
+        <span>字符数：</span><span id="total-char"></span>
+        <span>总行数：</span><span id="line-count"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+        <span>当前行：</span><span id="curr-line"></span>,
+        <span>当前列：</span><span id="curr-ch"></span>
+    </div>
+    <div class="bottom-right">
+        <span>文章已自动更新</span>&nbsp;&nbsp;<span>00:00:00</span>
+    </div>
+</footer>
+<!--选择目录-->
+<div id="dirframe" hidden>
+    <div class="layui-card">
+        <div class="layui-card-header">目录视图</div>
+        <div class="layui-card-body">
+            <div id="dir-system">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/layui/layui.js}"></script>
+<script th:src="@{/markdown/js/jquery-3.1.1.min.js}"></script>
+<script th:src="@{/markdown/js/jquery-md5.js}"></script>
+<script th:src="@{/markdown/js/editormd.js}"></script>
+<script th:src="@{/markdown/lib/codemirror/codemirror.min.js}"></script>
+<script th:src="@{/assets/js/markdown.js}"></script>
+
+</body>
+</html>

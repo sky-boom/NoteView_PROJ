@@ -1,0 +1,24 @@
+body{ top: 0; right: 0; bottom: 0; left: 0; position: fixed;}
+/**********头部*********/
+header{width:100%;min-height:50px;position:fixed;background-color:#2F4056;z-index:11002;top:0;left:0;border-bottom:1px solid #e8e9e7;font-size:14px}
+/* 暴力改layui源代码 */
+.layui-nav, .layui-nav a{ height: 48px; line-height: 48px;}
+header .prev{ height: 48px; position: fixed; left: 5; /* background-color: #0000C0; */ line-height: 50px; padding-left: 30px;}
+header .prev a{ display: inline-block; }
+header .prev span{ color: #ececec;}
+header .middle{position: fixed; width: 400px; height: 34px; margin: 8px; margin-left: 100px; font-size: 20px;}
+header .title-input{ height: 34px; width: 400px; padding-left: 20px; border-radius: 25px; border: none;}
+header .right{ margin: 6px 0; position: fixed; right: 0; margin-right: 200px;}
+/**********编辑器*********/ 
+#layout{ margin-top: 50px; }
+/* 取消编辑器低下的margin */
+#test-editormd{ margin-bottom: 0; }
+/* 调整编辑器高度 */
+.editormd{ position: fixed; bottom: 24px; }
+
+/**********底部*********/
+footer{ height: 24px; width: 100%; background-color: #2F4056; position: fixed; bottom: 0;z-index: 100; color: #f3f3f3;}
+footer div{ display: inline-block; }
+footer span:nth-child(2n - 1){ margin-left: 20px; }
+.bottom-left{ float: left; }
+.bottom-right{ float: right; margin-right: 100px; }

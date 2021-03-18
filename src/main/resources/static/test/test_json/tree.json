@@ -1,0 +1,21 @@
+[
+  {
+    "dir_id": 1,
+    "dir_name": "test",
+    "parent_dir_id": -1,
+    "children": [
+      {
+        "dir_id": 10,
+        "dir_name": "just_test",
+        "parent_dir_id": 1,
+        "children": []
+      }
+    ]
+  },
+  {
+    "dir_id": 2,
+    "dir_name": "spring",
+    "parent_dir_id": -1,
+    "children": []
+  }
+]

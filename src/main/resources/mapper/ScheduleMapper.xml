@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//MyBatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置映射
+    namespace : 命名空间(通俗说法: 给当前映射文件的唯一标识:起一个唯一的名字)
+    绑定一个对应的DAO接口
+ -->
+<mapper namespace="com.wzr.dao.ScheduleMapper">
+
+    <select id="queryAllSche" resultType="Ext_Schedule">
+        SELECT * FROM noteview.ext_schedule
+    </select>
+
+    <select id="queryTodaySche" resultType="Ext_Schedule">
+        SELECT * FROM noteview.ext_schedule
+        WHERE TO_DAYS(`created`) = TO_DAYS(NOW());
+    </select>
+
+    <select id="queryRangeSche" parameterType="Date" resultType="Ext_Schedule">
+        SELECT * FROM noteview.ext_schedule
+        WHERE `created` BETWEEN #{start} AND #{end};
+    </select>
+
+    <update id="edit" parameterType="map">
+        UPDATE `noteview`.`ext_schedule`
+        <trim prefix="set" suffixOverrides=",">
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="progress != null">
+                progress = #{progress},
+            </if>
+            <if test="anticipation != null">
+                anticipation = #{anticipation},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks},
+            </if>
+            <if test="finished != null">
+                finished = #{finished},
+            </if>
+        </trim>
+        WHERE id = #{id};
+    </update>
+
+    <insert id="addOne" parameterType="Ext_Schedule">
+        INSERT INTO `noteview`.`ext_schedule` VALUES
+        (#{id}, #{created}, #{title}, #{description}, #{progress}, #{anticipation}, #{remarks}, #{finished});
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM `noteview`.`ext_schedule`
+        WHERE `id` = #{id};
+    </delete>
+
+</mapper>

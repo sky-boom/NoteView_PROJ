@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" th:href="@{layui/css/layui.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{assets/css/header.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{assets/css/read.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{assets/font-awesome/css/font-awesome.css}" />
+	</head>
+	<body onload="getTree();getAllDoc();">
+		<header class="gird-header">
+			<div class="header-logo"><a href="/index">NoteView</a></div>
+			<!-- 左侧 -->
+			<ul class="layui-nav layui-layout-left" lay-filter="">
+				<li class="layui-nav-item"><a href="/home">首页</a></li>
+				<li class="layui-nav-item layui-this"><a href="/myblog">我的博客</a>
+					<dl class="layui-nav-child">
+						<!-- 二级菜单 -->
+						<dd><a href="/dirview">目录视图</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">写文章</a>
+					<dl class="layui-nav-child">
+						<!-- 二级菜单 -->
+						<dd><a href="/markdown" target="_blank" >MarkDown</a></dd>
+					</dl>
+				</li>
+			</ul>
+			<!-- 右侧 -->
+			<ul class="right-nav layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+					<a href="javascript:;">
+						<img src="" class="layui-nav-img">
+						仁
+					</a>
+					<dl class="layui-nav-child">
+						<dd><a href="#">基本资料</a></dd>
+						<dd><a href="#">安全设置</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item"><a href="#">注销</a></li>
+			</ul>
+		</header>
+		
+		<div class="doc-container" id="doc-container">
+			<div class="container-fixed">
+				<!-- 侧边栏 -->
+				<div class="col-side layui-card">
+					<div class="layui-card-header">
+						<span>目录视图</span>
+						<button type="button" class="layui-btn layui-btn-primary layui-btn-sm" id="dir-header-button"><i class="layui-icon layui-icon-cols"></i></button>
+					</div>
+					<div class="layui-card-body">
+						<div class="mb15">
+							<a class="layui-btn layui-btn-sm" onclick="create_dir()"><i class="fa fa-folder-o"></i> 新建</a>
+							<a class="layui-btn layui-btn-sm layui-btn-danger" onclick="delete_dir()"><i class="fa fa-folder-o"></i> 删除</a>
+							<a class="layui-btn layui-btn-sm layui-btn-normal f-fr" onclick="rename_dir()"><i class="fa fa-folder-o"></i> 重命名</a>
+						</div>
+						
+						<div id="dir-system" onselectstart="return false" >
+							<!--
+							<div id="dir-system">
+								<ul>
+									<li dir_id="" parent_id="" class="selected"><a><i></i><span>test</span></a></li>
+									<li dir_id="" parent_id="" ><a><i></i><span>spring</span></a></li>
+									<li dir_id="" parent_id="" ><a><i></i><span>java</span></a></li>
+
+									<li dir_id="" parent_id="" ><a><i></i><span>filesssss</span></a>
+										<ul>
+											<li dir_id="" parent_id="" ><a><i></i><span>删库</span></a></li>
+											<li dir_id="" parent_id="" ><a><i></i><span>删库</span></a></li>
+										</ul>
+										<ul class="files">
+											<li art_id=""><a href="/content/blog/.."></a></li>
+											<li art_id=""><a href="/content/blog/.."></a></li>
+										</ul>
+									</li>
+								</ul>
+								<dl class="files" id="file-root" hidden>
+									<dd art_id=""><a href="/content/blog/.."></a></dd>
+									<dd art_id=""><a href="/content/blog/.."></a></dd>
+								</dl>
+							</div>
+							-->
+						</div>
+					</div>
+					<!--右键菜单-->
+					<div id="rightmouse" hidden>
+						<button id="cut" class="layui-btn layui-btn-xs layui-btn-primary layui-anim layui-anim-fadein">
+							<i class="fa fa-scissors"></i> 剪切
+						</button>
+						<button id="move" class="layui-btn layui-btn-xs layui-btn-primary layui-anim layui-anim-fadein">
+							<i class="fa fa-angle-double-right"></i> 移动
+						</button>
+					</div>
+				</div>
+				
+				<!-- 具体文章 -->
+				<div class="col-content mb20" >
+					<div class="inner layui-card">
+						<div class="layui-card-header mt10">文章列表</div>
+						<div class="layui-card-body">
+							<span class="layui-breadcrumb">
+								<a href="#">全部</a>
+								<div class="bread-right">
+									<button type="button" class="layui-btn layui-btn-sm"><i class="fa fa-file-o"></i> 转入</button>
+								</div>
+							</span>
+							<ul id="file-list">
+<!--								<li>-->
+<!--									<div class="dir-file">-->
+<!--										<p class="title">-->
+<!--											<a href="#">[Linux学习] 安装linux时，配置根分区和home分区的区别和联系</a>-->
+<!--										</p>-->
+<!--										<div class="operation">-->
+<!--											<span class="layui-breadcrumb" lay-separator="|">-->
+<!--											  <a href="#">编辑</a>-->
+<!--											  <a href="#">查看</a>-->
+<!--											  <a href="#" onclick="delete_file()">移除</a>-->
+<!--											</span>-->
+<!--										</div>-->
+<!--										<div class="update">-->
+<!--											<span>最近更新: <span>1天前</span></span>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</li>-->
+							</ul>
+
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<footer class="grid-footer">
+			<div class="footer-fixed">
+				<div class="copyright">
+					<div class="info">
+						<div class="contact">
+							<a href="javascript:void(0)" class="github" target="_blank"><i class="fa fa-github"></i></a>
+							<a href="https://wpa.qq.com/msgrd?v=3&uin=930054439&site=qq&menu=yes" class="qq" target="_blank" title="930054439"><i
+								 class="fa fa-qq"></i></a>
+							<a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=gbiysbG0tbWyuMHw8K-i7uw" class="email" target="_blank"
+							 title="930054439@qq.com"><i class="fa fa-envelope"></i></a>
+							<a href="javascript:void(0)" class="weixin"><i class="fa fa-weixin"></i></a>
+						</div>
+						<p class="mt05">
+							Copyright &copy; 2021-2021 仁 All Rights Reserved V.1.0.0 蜀ICP备0000000号
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		
+		
+		<!-- layui js -->
+		<script th:src="@{layui/layui.js}"></script>
+		<!-- jquery -->
+		<script th:src="@{assets/js/jquery-3.1.1.min.js}"></script>
+		<!-- myblog -->
+<!--		<script th:src="@{assets/js/myblog.js}"></script>-->
+		<script th:src="@{assets/js/dirview.js}"></script>
+
+	</body>
+</html>

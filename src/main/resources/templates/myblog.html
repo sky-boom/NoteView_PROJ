@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" th:href="@{layui/css/layui.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{assets/css/myblog.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{assets/css/header.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{assets/font-awesome/css/font-awesome.css}" />
+
+	</head>
+	<body onload="showArtList()">
+		<header class="gird-header">
+			<div class="header-logo"><a href="/index">NoteView</a></div>
+			<!-- 左侧 -->
+			<ul class="layui-nav layui-layout-left" lay-filter="">
+				<li class="layui-nav-item"><a href="/home">首页</a></li>
+				<li class="layui-nav-item layui-this"><a href="/myblog">我的博客</a>
+					<dl class="layui-nav-child">
+						<!-- 二级菜单 -->
+						<dd><a href="/dirview">目录视图</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">写文章</a>
+					<dl class="layui-nav-child">
+						<!-- 二级菜单 -->
+						<dd><a href="/markdown" target="_blank" >MarkDown</a></dd>
+					</dl>
+				</li>
+			</ul>
+			<!-- 右侧 -->
+			<ul class="right-nav layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+					<a href="javascript:;">
+						<img src="" class="layui-nav-img">
+						仁
+					</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">基本资料</a></dd>
+						<dd><a href="">安全设置</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item"><a href="">注销</a></li>
+			</ul>
+
+		</header>
+		
+		<div class="doc-container" id="doc-container">
+
+			<div class="container-fixed">
+				<!-- 侧边栏 -->
+				<div class="col-side">
+					<a class="goto" href="">MarkDown编辑器</a>
+					<a href="/dirview" class="goto goto2">
+						<span>目录视图</span>
+					</a>
+					<div class="side-list">
+						<!-- select -->
+						<ul id="accordion">
+							<li class="selected">
+								<i class="icon fa fa-file-text"></i>
+								<span class="desc">我的文章</span>
+							</li>
+							<li>
+								<i class="icon fa fa-pie-chart"></i>
+								<span class="desc">数据展示</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- 内容主体 -->
+				<div class="col-content" id="result">
+					<!-- 计划每个list用ajax显示 -->
+					
+					<!-- 我的文章 start -->
+					<div class="list" name="我的文章">
+
+						<!-- tab -->
+						<div class="top-tab layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+							<ul class="layui-tab-title">
+								<li class="layui-this">全部<span class="layui-badge layui-bg-gray">9</span></li>
+								<li>草稿箱<span class="layui-badge layui-bg-gray">3</span></li>
+							</ul>
+						</div>
+					
+						<!-- 条件表单 -->
+						<form class="if-form layui-form" action="">
+							<div class="layui-form-item">
+								<label class="layui-form-label">时间范围</label>
+								<div class="layui-input-block">
+									<input type="text" class="if-Date layui-input" placeholder="不限" />
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<label class="layui-form-label">文章类型</label>
+								<div class="selectmanu layui-input-block">
+									<select name="type" lay-verify="">
+										<option value="">不限</option>
+										<option value="0">转载</option>
+										<option value="1">原创</option>
+									</select>
+								</div>
+							</div>
+							<div class="layui-form-item dir-select">
+								<div class="selectmanu" id="dir-info">
+									<input type="text" name="dir_name" lay-verify="title" autocomplete="off" placeholder="所属目录" class="layui-input" readonly>
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<div class="selectmanu layui-input-block ml05">
+									<input type="text" name="keyword" placeholder="请输入关键词" class="if-search layui-input" />
+								</div>
+							</div>
+
+							<div class="layui-form-item">
+								<div class="layui-input-block">
+									<button class="layui-btn" lay-submit lay-filter="formDemo">搜索</button>
+									<button type="reset" name="reset" class="layui-btn layui-btn-primary">重置</button>
+								</div>
+							</div>
+						</form>
+
+						<!-- 文章列表 -->
+						<div class="content-list">
+							<ul class="content-file" id="content-file">
+								<!--
+								<li>
+									<div class="content-card">
+										<p class="cont-title"><a href="/read" target="_blank">[Linux学习] 安装linux时，配置根分区和home分区的区别和联系</a></p>
+										<span class="layui-badge layui-bg-green">原创</span>
+										<div class="bottom-mess">
+											<span>2020年05月18日 10:58:01</span>
+											<span class="border">|</span>
+											<i class="fa fa-eye"></i>
+											<span>293</span>
+											<i class="fa fa-commenting-o"></i>
+											<span>293</span>
+											<i class="fa fa-heart-o"></i>
+											<span>293</span>
+											<span class="bottom-util">
+												<a href="">编辑</a>
+												<a href="">浏览</a>
+												<a href="#" class="menu-icon">
+													<i class="fa fa-list-ul"></i>
+													<dl class="menu-sm">
+														<dd><a href="">基本资料</a></dd>
+														<dd><a href="">安全设置</a></dd>
+													</dl>
+												</a>
+											</span>
+										</div>
+									</div>
+								</li>
+								-->
+							</ul>
+							<ul class="pagination" id="pagination">
+								<!--
+								<li><a href="#">«</a></li>
+								<li><a class="active" href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">6</a></li>
+								<li><a href="#">7</a></li>
+								<li><a href="#">下一页</a></li>
+								<li><a href="#">»</a></li>
+								-->
+							</ul>
+						</div>
+					</div>
+					<!--选择目录-->
+					<div id="dirframe" hidden>
+						<div class="layui-card">
+							<div class="layui-card-header">目录视图</div>
+							<div class="layui-card-body">
+								<div id="dir-system">
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End of 我的文章 -->
+					
+					<!-- 数据展示 start -->
+					<div class="list" name="数据展示" hidden>
+						数据展示
+					</div>
+					<!-- End of 数据展示 -->
+				</div>
+			</div>
+		</div>
+		<footer class="grid-footer">
+			<div class="footer-fixed">
+				<div class="copyright">
+					<div class="info">
+						<div class="contact">
+							<a href="javascript:void(0)" class="github" target="_blank"><i class="fa fa-github"></i></a>
+							<a href="https://wpa.qq.com/msgrd?v=3&uin=930054439&site=qq&menu=yes" class="qq" target="_blank" title="930054439"><i
+								 class="fa fa-qq"></i></a>
+							<a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=gbiysbG0tbWyuMHw8K-i7uw" class="email" target="_blank"
+							 title="930054439@qq.com"><i class="fa fa-envelope"></i></a>
+							<a href="javascript:void(0)" class="weixin"><i class="fa fa-weixin"></i></a>
+						</div>
+						<p class="mt05">
+							Copyright &copy; 2021-2021 仁 All Rights Reserved V.1.0.0 蜀ICP备0000000号
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+
+
+
+		<!-- layui js -->
+		<script th:src="@{layui/layui.js}"></script>
+		<!-- jquery -->
+		<script th:src="@{assets/js/jquery-3.1.1.min.js}"></script>
+		<!-- myblog -->
+		<script th:src="@{assets/js/myblog.js}"></script>
+	</body>
+</html>
