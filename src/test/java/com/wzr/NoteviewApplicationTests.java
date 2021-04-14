@@ -4,11 +4,15 @@ import com.wzr.dao.DirectoryMapper;
 import com.wzr.dao.UserMapper;
 import com.wzr.model.Po.Dir_item;
 import com.wzr.service.DirectoryService;
+import com.wzr.utils.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @SpringBootTest
 class NoteviewApplicationTests
@@ -50,5 +54,19 @@ class NoteviewApplicationTests
     @Test
     void testTimeZone(){
         System.out.println(new Date());
+    }
+
+    @Autowired
+    private RedisUtil redisUtil;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Test
+    void testRedis()
+    {
+        redisUtil.set("1001", "view", 1);
+        redisUtil.incr("1001", "view", 1);
+        System.out.println(redisUtil.get("1001", "view"));
     }
 }

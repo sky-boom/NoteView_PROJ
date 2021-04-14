@@ -196,6 +196,17 @@ function showArtList(){
 	});
 }
 function getListCardHtml(art_id, title, type, create_time, hits, comments_num, likes) {
+	//先从redis中取出hit的值
+	var hits = 0;
+	$.post({
+		url: "/content/hit/" + art_id,
+		async:false,  //设置同步请求
+		success:function (data) {	//data: int
+			hits = data;
+			console.log("文章" + art_id + "的点击量:" + hits);
+		}
+	});
+	console.log("文章" + art_id + "的点击量:" + hits);
 	var html = 
 		'<li>\n' +
 		'	<div class="content-card" art_id="' + art_id + '">\n' +

@@ -119,7 +119,7 @@ layui.use(['form', 'element'], function(){
         if(content.search(/^.*\n*\[TOC\]\n/) === -1)     //如果不能匹配
             content = "[TOC]\n" + content;
 
-        $.get({
+        $.post({
             url: "/content/publish",
             data: {
                 "title": info.title,
@@ -176,7 +176,7 @@ $("#dir_info").on("click", "#getDir", function (){
 
 //具体目录
 function getDirFrame(){
-    $.get({
+    $.post({
         url: "/dir/getall",
         dataType:'json',
         success:function (data) {

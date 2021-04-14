@@ -40,9 +40,21 @@ public class ContentServiceImpl implements ContentService
     }
 
     @Override
+    public int updateArticle(Article article)
+    {
+        return contentMapper.updateArticle(article);
+    }
+
+    @Override
     public List<Object> getArtList(int user_id, int start, int page, String keyword, int dir_id)
     {
         return contentMapper.getArtList(user_id, start, page, keyword, dir_id);
+    }
+
+    @Override
+    public List<Article> getAllArt()
+    {
+        return contentMapper.getAllArt();
     }
 
     @Override

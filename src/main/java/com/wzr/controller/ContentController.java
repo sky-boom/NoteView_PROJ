@@ -1,10 +1,12 @@
 package com.wzr.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wzr.config.redis.ListendHandler;
 import com.wzr.model.Po.Article;
 import com.wzr.model.Vo.ArticleInfo;
 import com.wzr.service.ContentService;
 import com.wzr.service.UserService;
+import com.wzr.utils.RedisUtil;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,8 @@ public class ContentController
     ContentService contentService;
     @Autowired
     UserService userService;
+    @Autowired
+    RedisUtil redisUtil;
 
     //发布文章
     @RequestMapping("/content/publish")
@@ -83,8 +87,23 @@ public class ContentController
 
         model.addAttribute("artInfo", articleInfo);
 
+        //指定文章id浏览量+1
+        redisUtil.incr(String.valueOf(art_id), "hits", 1);
+
         return "read";
     }
+
+    //ajax请求从redis中返回点击量
+    @RequestMapping("/content/hit/{art_id}")
+    @ResponseBody
+    public int hit(@PathVariable int art_id)
+    {
+        double ans = (double) redisUtil.get(String.valueOf(art_id), "hits");
+        int hits = (int) ans;
+        System.out.print("文章" + art_id + "的点击量:" + hits + ", ");
+        return hits;
+    }
+
 
     //
     @RequestMapping("/content/edit/{art_id}")

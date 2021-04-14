@@ -10,8 +10,14 @@ public interface ContentService
     //发布文章(可选择将文章发布到指定目录), 返回文章id
     int publishArticle(Article article, int dir_id, boolean isEdit);
 
+    //更新文章
+    int updateArticle(Article article);
+
     //获取文章列表, 第一个是列表，第二个是count
     List<Object> getArtList(int user_id, int start, int page, String keyword, int dir_id);
+
+    //获取所有文章列表
+    List<Article> getAllArt();
 
     //得到一篇文章所需数据
     ArticleInfo getArtView(int art_id, int user_id);

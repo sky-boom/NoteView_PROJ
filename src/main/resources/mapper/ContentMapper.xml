@@ -25,6 +25,9 @@
             <if test="content != null">
                 content = #{content},
             </if>
+            <if test="hits != null">
+                hits = #{hits},
+            </if>
         </trim>
         WHERE art_id = #{art_id} AND user_id = #{user_id};
     </update>
@@ -61,6 +64,10 @@
             limit #{start},#{page}
         </if>;
         SELECT FOUND_ROWS() AS total;
+    </select>
+
+    <select id="getAllArt" parameterType="int" resultMap="article, count">
+        SELECT * FROM `noteview`.`article`;
     </select>
 
     <select id="queryArtById" parameterType="int" resultType="Article">

@@ -31,6 +31,7 @@ public class ShiroConfig
         filterMap.put("/", "anon");         // 首页
         filterMap.put("/index", "anon");    // 首页
         filterMap.put("/tologin", "anon");    // 登录页
+        filterMap.put("/logout","logout");  //触发注销机制
 
 //        filterMap.put("/**", "authc");  //终极拦截, 放到最后
         bean.setFilterChainDefinitionMap(filterMap);

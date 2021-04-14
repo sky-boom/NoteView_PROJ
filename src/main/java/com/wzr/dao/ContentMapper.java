@@ -14,8 +14,13 @@ public interface ContentMapper
     //获取文章列表
     List<Object> getArtList(int user_id, int start, int page, String keyword, int dir_id);
 
+    //获取所有文章列表
+    List<Article> getAllArt();
+
+
     //根据id查询文章
     Article queryArtById(int art_id, int user_id);
+
 
     /**
      *  ********************* 增 insert *********************
