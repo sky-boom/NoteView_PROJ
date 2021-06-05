@@ -29,7 +29,6 @@ public class ListendHandler {
         System.out.println("数据库开始初始化");
         //将数据中的数据一次写入Redis缓存
         List<Article> artList = contentService.getAllArt();
-        System.out.println("==============" + artList);
         artList.forEach(art -> {
             //将数据库中的数据写入Redis
             redisUtil.set(String.valueOf(art.getArt_id()),"hits", art.getHits());
