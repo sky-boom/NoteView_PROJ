@@ -34,18 +34,19 @@ spring:
     suffix: .html
     encoding: UTF-8
     mode: HTML5
-  redis:
-    host: 192.168.203.129
-    port: 6379
-    password: 300074
-    jedis:
-      pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 500
-        min-idle: 0
-    lettuce:
-      shutdown-timeout: 0
+#  redis:
+#    host: 192.168.203.129
+#    port: 6379
+#    password: 300074
+#    jedis:
+#      pool:
+#        max-active: 8
+#        max-wait: -1
+#        max-idle: 500
+#        min-idle: 0
+#    lettuce:
+#      shutdown-timeout: 0
+
 #  # 图片静态资源访问路径
 #  mvc:  # 映射url
 #    static-path-pattern: /image/**
